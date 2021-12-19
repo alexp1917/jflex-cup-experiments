@@ -1,3 +1,4 @@
+package parser;
 /**
  * The tokens returned by the scanner.
  */

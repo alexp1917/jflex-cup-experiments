@@ -7,8 +7,8 @@ repositories {
 }
 
 sourceSets {
-    jflex {
-        java.srcDir('build/generated/sources/jflex')
+    main {
+        java.srcDir('build/generated/sources/main')
     }
 }
 
@@ -30,24 +30,26 @@ dependencies {
 
 tasks.register('jflex', JavaExec) {
     it.group('build')
-    def outDir = sourceSets.jflex.java.srcDirs.stream()
+    def outDir = sourceSets.main.java.srcDirs.stream()
             .filter(e -> e.toString().contains('generated'))
             .findAny().orElseThrow()
-    it.getInputs().dir('src/jflex/java')
-    it.getInputs().dir('src/jflex/resources')
+    it.getInputs().dir('src/main/java')
+    it.getInputs().dir('src/main/resources')
     it.getOutputs().dir(outDir)
 
     it.classpath(configurations.jflex.asPath)
     it.main('jflex.Main')
     it.args('-d')
     it.args(outDir)
-    it.args(sourceSets.jflex.resources.collect())
+    it.args(sourceSets.main.resources.collect())
 }
+
+tasks.compileJava.dependsOn('jflex')
 
 tasks.register('helloworld') {
     it.group('build')
     it.doLast {
-        println(sourceSets.jflex.java.srcDirs.stream().findAny().orElseThrow())
+        println(sourceSets.main.java.srcDirs.stream().findAny().orElseThrow())
         // println(configurations.jflex.asPath)
         // println(sourceSets.jflex.resources.collect())
     }
