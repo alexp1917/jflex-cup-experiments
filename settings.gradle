@@ -1,3 +1,4 @@
 rootProject.name = 'jflex-cup-experiments'
 include('lib')
 include('parser')
+include('antlr')
