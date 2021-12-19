@@ -9,6 +9,9 @@ repositories {
 sourceSets {
     main {
         java.srcDir('build/generated/sources/main')
+        resources {
+            exclude('expressions.flex')
+        }
     }
 }
 
