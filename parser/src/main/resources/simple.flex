@@ -14,6 +14,7 @@ package parser;
 %char
 %state COMMENT
 %unicode
+%class SimpleLexer
 
 %debug
 
